@@ -2,7 +2,7 @@ FROM openjdk:17-alpine
 
 EXPOSE 9193
 
-ARG JAR_FILE=target/user-service-0.0.1-SNAPSHOT.jar
+ARG JAR_FILE=target/nearby-service-0.0.1-SNAPSHOT.jar
 ADD ${JAR_FILE} app.jar
 
 ENTRYPOINT exec java -jar /app.jar
