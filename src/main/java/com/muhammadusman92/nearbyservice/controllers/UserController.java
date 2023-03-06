@@ -43,8 +43,10 @@ public class UserController {
     }
     @PutMapping("/{userId}")
     public ResponseEntity<Response> updateUser(@RequestBody UserDto userDto,@PathVariable Integer userId, HttpServletRequest request){
-        String email = request.getHeader("username");
+        String email = request.getHeader("userEmail");
         userDto.setEmail(email);
+        String name = request.getHeader("userName");
+        userDto.setName(name);
         UserDto updateUser = userService.updateUser(userDto,userId);
         return new ResponseEntity<>(Response.builder()
                 .timeStamp(now())

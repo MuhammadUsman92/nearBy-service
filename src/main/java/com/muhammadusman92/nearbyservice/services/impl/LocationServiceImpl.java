@@ -56,11 +56,12 @@ public class LocationServiceImpl implements LocationService {
     }
 
     @Override
-    public LocationAndNotificationResponse updateLocationOfUserEmail(LocationDto locationDto, String userEmail) {
+    public LocationAndNotificationResponse updateLocationOfUserEmail(LocationDto locationDto, String userEmail, String userName) {
         Location location = ConversionDtos.locationDtoToLocation(locationDto);
         if(!(userRepo.existsUserByEmail(userEmail))){
             User createUser = new User();
             createUser.setEmail(userEmail);
+            createUser.setUserName(userName);
             createUser.setLocation(location);
             location.setUser(createUser);
             userRepo.save(createUser);

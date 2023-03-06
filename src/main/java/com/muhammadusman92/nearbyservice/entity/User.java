@@ -24,7 +24,7 @@ public class User {
     private int id;
     @Column(name = "email",unique = true,nullable = false)
     private String email;
-
+    private String userName;
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     @PrimaryKeyJoinColumn
     private Location location;

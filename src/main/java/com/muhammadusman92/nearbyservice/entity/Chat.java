@@ -22,7 +22,9 @@ public class Chat {
     private Integer id;
 
     private String senderEmail;
+    private String senderName;
     private String receiverEmail;
+    private String receiverName;
     private Date date;
     private String message;
     @ManyToOne(fetch = FetchType.LAZY)
