@@ -11,7 +11,6 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
-@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class LocationAndNotificationResponse {
     private LocationDto locationDto;
     private boolean notificationPresent;
