@@ -33,9 +33,8 @@ public class LocationController {
                 .build(), CREATED);
     }
     @PutMapping("/")
-    public ResponseEntity<Response> updateLocation(@RequestBody LocationDto locationDto, HttpServletRequest request){
-        String email = request.getHeader("userEmail");
-        LocationAndNotificationResponse updateLocation = locationService.updateLocationOfUserEmail(locationDto,email);
+    public ResponseEntity<Response> updateLocation(@RequestHeader("Authorization") String token,@RequestHeader("userEmail") String userEmail,@RequestBody LocationDto locationDto, HttpServletRequest request){
+        LocationAndNotificationResponse updateLocation = locationService.updateLocationOfUserEmail(locationDto,userEmail,token);
         return new ResponseEntity<>(Response.builder()
                 .timeStamp(now())
                 .message("Location is successfully updated")

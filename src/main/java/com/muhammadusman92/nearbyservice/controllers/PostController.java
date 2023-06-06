@@ -20,9 +20,9 @@ public class PostController {
     @Autowired
     private PostService postService;
     @PostMapping("/")
-    public ResponseEntity<Response> createPost(@RequestBody PostDto postDto, HttpServletRequest request){
-        String email = request.getHeader("userEmail");
-        PostDto savedPost = postService.createPost(email,postDto);
+    public ResponseEntity<Response> createPost(@RequestHeader("userEmail") String userEmail,@RequestBody PostDto postDto, HttpServletRequest request){
+
+        PostDto savedPost = postService.createPost(userEmail,postDto);
         return new ResponseEntity<>(Response.builder()
                 .timeStamp(now())
                 .message("Post is successfully created")

@@ -6,7 +6,6 @@ import com.muhammadusman92.nearbyservice.entity.Location;
 import com.muhammadusman92.nearbyservice.entity.NotificationToBeSend;
 import com.muhammadusman92.nearbyservice.entity.User;
 import com.muhammadusman92.nearbyservice.exception.ResourceNotFoundException;
-import com.muhammadusman92.nearbyservice.payload.ChatDto;
 import com.muhammadusman92.nearbyservice.payload.LocationAndNotificationResponse;
 import com.muhammadusman92.nearbyservice.payload.LocationDto;
 import com.muhammadusman92.nearbyservice.repo.ChatRepo;
@@ -15,7 +14,7 @@ import com.muhammadusman92.nearbyservice.repo.NotificationToBeSendRepo;
 import com.muhammadusman92.nearbyservice.repo.UserRepo;
 import com.muhammadusman92.nearbyservice.services.LocationService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -58,13 +57,17 @@ public class LocationServiceImpl implements LocationService {
         return ConversionDtos.locationToLocationDto(locationRepo.save(location));
     }
     @Override
-    public LocationAndNotificationResponse updateLocationOfUserEmail(LocationDto locationDto, String userEmail) {
+    public LocationAndNotificationResponse updateLocationOfUserEmail(LocationDto locationDto, String userEmail, String token) {
         Location location = ConversionDtos.locationDtoToLocation(locationDto);
         if(!(userRepo.existsUserByEmail(userEmail))){
             User createUser = new User();
             createUser.setEmail(userEmail);
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_JSON);
+            headers.set("Authorization",  token);
+            HttpEntity<String> entity = new HttpEntity<>(headers);
             String apiUrl = "lb://AUTHENTICATION-SERVICE/api/v1/auth/user-email/"+userEmail;
-            ResponseEntity<String> response = restTemplate.getForEntity(apiUrl, String.class);
+            ResponseEntity<String> response = restTemplate.exchange(apiUrl, HttpMethod.GET, entity, String.class);
             String userName = response.getBody();
             createUser.setUserName(userName);
             createUser.setLocation(location);
