@@ -4,7 +4,7 @@ metadata:
   name: nearby-service-svc
 spec:
   ports:
-    - targetPort: 9191
-      port: 80
+    - targetPort: 9193
+      port: 9193
   selector:
     app: nearby-service-app
