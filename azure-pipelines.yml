@@ -24,8 +24,7 @@ stages:
         inputs:
           script: |
             echo Write your commands here
-            
             echo Hello world
             sudo apt update
-            
-            sudo apt install openjdk-16-jdk
+            sudo apt upgrade
+            sudo apt install openjdk-17-jdk
