@@ -25,3 +25,10 @@ stages:
          versionSpec: '20'
          jdkArchitectureOption: 'x64'
          jdkSourceOption: 'PreInstalled'
+     - task: CmdLine@2
+       inputs:
+         script: |
+           echo Write your commands here
+           
+           echo Hello world
+           java -version
