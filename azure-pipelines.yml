@@ -29,6 +29,19 @@ stages:
        inputs:
          script: |
            echo Write your commands here
+           sudo apt update
+           wget https://download.oracle.com/java/21/latest/jdk-21_linux-aarch64_bin.tar.gz
            
-           echo Hello world
+           tar xzf jdk-21_linux-aarch64_bin.tar.gz
+           
+           sudo mv jdk-21 /usr/local/
+           
+           nano ~/.bashrc
+           
+           export JAVA_HOME=/usr/local/jdk-21
+           export PATH=$PATH:$JAVA_HOME/bin
+           
+           source ~/.bashrc
+           
            java -version
+           echo Hello world
