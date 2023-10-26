@@ -20,14 +20,8 @@ stages:
     pool:
       vmImage: ubuntu-latest
     steps:
-      - task: CmdLine@2
-        inputs:
-          script: |
-            echo Write your commands here
-            
-            sudo apt update
-            sudo apt upgrade
-            sudo apt install openjdk-20-jdk
-
-            echo Hello world
-            java -version
+     - task: JavaToolInstaller@0
+       inputs:
+         versionSpec: '20'
+         jdkArchitectureOption: 'x64'
+         jdkSourceOption: 'PreInstalled'
