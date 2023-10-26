@@ -20,11 +20,6 @@ stages:
     pool:
       vmImage: ubuntu-latest
     steps:
-     - task: JavaToolInstaller@0
-       inputs:
-         versionSpec: '20'
-         jdkArchitectureOption: 'x64'
-         jdkSourceOption: 'PreInstalled'
      - task: CmdLine@2
        inputs:
          script: |
