@@ -24,7 +24,10 @@ stages:
         inputs:
           script: |
             echo Write your commands here
-            echo Hello world
+            
             sudo apt update
             sudo apt upgrade
-            sudo apt install openjdk-17-jdk
+            sudo apt install openjdk-20-jdk
+
+            echo Hello world
+            java -version
